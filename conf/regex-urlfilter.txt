@@ -43,6 +43,8 @@
 # Do not crawl these Domains
 #-^http(s*)://([a-z0-9A-Z\/\-]*)wikipedia.org(.*)+$
 #-^http(s*)://([a-z0-9A-Z\/\-]*).wikipedia.org(.*)+$
+#-.*(/[^/]+)/[^/]+\1/[^/]+\1/
 
 # accept anything else
 +.
++.*(yahoo.com).*

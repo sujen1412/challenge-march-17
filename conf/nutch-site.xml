@@ -158,7 +158,7 @@
 
 <property>
   <name>db.ignore.external.links</name>
-  <value>true</value> <!-- Changed from false -->
+  <value>false</value> <!-- Changed from false -->
   <description>If true, outlinks leading from a page to external hosts or domain
   will be ignored. This is an effective way to limit the crawl to include
   only initially injected hosts, without creating complex URLFilters.
@@ -311,7 +311,7 @@
 
 <property>
   <name>fetcher.follow.outlinks.depth</name>
-  <value>-1</value>
+  <value>1</value>
   <description>(EXPERT)When fetcher.parse is true and this value is greater than 0 the fetcher will extract outlinks
   and follow until the desired depth is reached. A value of 1 means all generated pages are fetched and their first degree
   outlinks are fetched and parsed too. Be careful, this feature is in itself agnostic of the state of the CrawlDB and does not
