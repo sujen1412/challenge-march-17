@@ -205,7 +205,7 @@
 
 <property>
   <name>generate.max.count</name>
-  <value>1000</value>
+  <value>100</value>
   <description>The maximum number of urls in a single
   fetchlist.  -1 if unlimited. The urls are counted according
   to the value of the parameter generator.count.mode.
