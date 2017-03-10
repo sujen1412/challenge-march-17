@@ -160,6 +160,7 @@
   <field name="title" type="string" stored="true" indexed="true" multiValued="false" />
   <field name="segment" type="string" stored="true" indexed="true" multiValued="false" />
   <field name="content_type" type="string" stored="true" indexed="true" multiValued="false" />
+  <field name="doc_type" type="string" stored="true" indexed="true" multiValued="false" />
   <!-- Future Use -->         
   <!-- <field name="retry_interval_days" type="int" indexed="true" stored="true" default="0" multiValued="false" docValues="true" /> -->
   <!-- <field name="retry_interval_seconds" type="long" indexed="true" stored="true" default="0" multiValued="false" docValues="true" /> -->
