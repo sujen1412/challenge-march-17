@@ -135,8 +135,8 @@
    <field name="crawler" type="string" indexed="true" stored="true" multiValued="false" default="sparkler"/> 
    <field name="crawl_id" type="string" indexed="true" stored="true"  multiValued="false" docValues="true" /> 
    <field name="raw_content" type="text_general" indexed="true" stored="true" multiValued="false" />
-   <field name="status_name" type="status" indexed="true" stored="true" default="UNFETCHED" multiValued="false" required="true" docValues="true" />
-   <field name="cdr_status" type="status" indexed="true" stored="true" default="NOT_INDEXED" multiValued="false" required="true" docValues="true" />
+   <field name="status_name" type="string" indexed="true" stored="true" default="UNFETCHED" multiValued="false" required="true" docValues="true" />
+   <field name="cdr_status" type="string" indexed="true" stored="true" default="NOT_INDEXED" multiValued="false" required="true" docValues="true" />
    <field name="extracted_text" type="text_general" indexed="true" stored="true" multiValued="false" />
    <field name="fetch_status_code" type="int" indexed="true" stored="true" default="0" multiValued="false" docValues="true" />
    <field name="hostname" type="string" indexed="true" stored="true"  multiValued="false" docValues="true" />
