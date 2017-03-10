@@ -18,28 +18,7 @@
 
 ### prohibit these
 # pictures
-.gif
-.jpg
-.jpeg
-.bmp
-.png
-.tif
-.tiff
-.ico
-.eps
-.ps
-.wmf
-.fpx
-.cur
-.ani
-.img
-.lwf
-.pcd
-.psp
-.psd
-.tga
-.xbm
-.xpm
+
 
 # web-formats
 .css

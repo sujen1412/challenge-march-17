@@ -1,0 +1,273 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+	<property>
+  <name>http.agent.name</name>
+  <value>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36</value>
+  <description>HTTP 'User-Agent' request header. MUST NOT be empty - 
+  please set this to a single word uniquely related to your organization.
+
+  NOTE: You should also check other related properties:
+
+    http.robots.agents
+    http.agent.description
+    http.agent.url
+    http.agent.email
+    http.agent.version
+
+  and set their values appropriately.
+
+  </description>
+</property>
+<property>
+  <name>db.ignore.internal.links</name>
+  <value>false</value>
+  <description>If true, outlinks leading from a page to internal hosts or domain
+  will be ignored. This is an effective way to limit the crawl to include
+  only initially injected hosts, without creating complex URLFilters.
+  See 'db.ignore.external.links.mode'.
+  </description>
+</property>
+
+<property>
+  <name>db.ignore.external.links</name>
+  <value>true</value>
+  <description>If true, outlinks leading from a page to external hosts or domain
+  will be ignored. This is an effective way to limit the crawl to include
+  only initially injected hosts, without creating complex URLFilters.
+  See 'db.ignore.external.links.mode'.
+  </description>
+</property>
+
+<property>
+  <name>db.max.outlinks.per.page</name>
+  <value>-1</value>
+  <description>The maximum number of outlinks that we'll process for a page.
+  If this value is nonnegative (>=0), at most db.max.outlinks.per.page outlinks
+  will be processed for a page; otherwise, all outlinks will be processed.
+  </description>
+</property>
+<property>
+  <name>db.signature.class</name>
+  <value>org.apache.nutch.crawl.TextMD5Signature</value>
+  <description>The default implementation of a page signature. Signatures
+  created with this implementation will be used for duplicate detection
+  and removal.</description>
+</property>
+<property>
+  <name>linkdb.ignore.internal.links</name>
+  <value>false</value>
+  <description>If true, when adding new links to a page, links from
+  the same host are ignored.  This is an effective way to limit the
+  size of the link database, keeping only the highest quality
+  links.
+  </description>
+</property>
+<property>
+  <name>generate.max.count</name>
+  <value>1000</value>
+  <description>The maximum number of urls in a single
+  fetchlist.  -1 if unlimited. The urls are counted according
+  to the value of the parameter generator.count.mode.
+  </description>
+</property>
+
+<property>
+  <name>fetcher.server.delay</name>
+  <value>3.0</value>
+  <description>The number of seconds the fetcher will delay between 
+   successive requests to the same server. Note that this might get
+   overridden by a Crawl-Delay from a robots.txt and is used ONLY if 
+   fetcher.threads.per.queue is set to 1.
+   </description>
+</property>
+
+<property>
+  <name>fetcher.server.min.delay</name>
+  <value>3.0</value>
+  <description>The minimum number of seconds the fetcher will delay between 
+  successive requests to the same server. This value is applicable ONLY
+  if fetcher.threads.per.queue is greater than 1 (i.e. the host blocking
+  is turned off).</description>
+</property>
+
+<property>
+ <name>fetcher.max.crawl.delay</name>
+ <value>30</value>
+ <description>
+ If the Crawl-Delay in robots.txt is set to greater than this value (in
+ seconds) then the fetcher will skip this page, generating an error report.
+ If set to -1 the fetcher will never skip such pages and will wait the
+ amount of time retrieved from robots.txt Crawl-Delay, however long that
+ might be.
+ </description>
+</property> 
+
+<property>
+  <name>fetcher.threads.fetch</name>
+  <value>10</value>
+  <description>The number of FetcherThreads the fetcher should use.
+  This is also determines the maximum number of requests that are
+  made at once (each FetcherThread handles one connection). The total
+  number of threads running in distributed mode will be the number of
+  fetcher threads * number of nodes as fetcher has one map task per node.
+  </description>
+</property>
+
+<property>
+  <name>fetcher.threads.per.queue</name>
+  <value>10</value>
+  <description>This number is the maximum number of threads that
+    should be allowed to access a queue at one time. Setting it to 
+    a value > 1 will cause the Crawl-Delay value from robots.txt to
+    be ignored and the value of fetcher.server.min.delay to be used
+    as a delay between successive requests to the same server instead 
+    of fetcher.server.delay.
+   </description>
+</property>
+<property>
+  <name>fetcher.parse</name>
+  <value>true</value>
+  <description>If true, fetcher will parse content. Default is false, which means
+  that a separate parsing step is required after fetching is finished.</description>
+</property>
+
+<property>
+  <name>fetcher.follow.outlinks.depth</name>
+  <value>-1</value>
+  <description>(EXPERT)When fetcher.parse is true and this value is greater than 0 the fetcher will extract outlinks
+  and follow until the desired depth is reached. A value of 1 means all generated pages are fetched and their first degree
+  outlinks are fetched and parsed too. Be careful, this feature is in itself agnostic of the state of the CrawlDB and does not
+  know about already fetched pages. A setting larger than 2 will most likely fetch home pages twice in the same fetch cycle.
+  It is highly recommended to set db.ignore.external.links to true to restrict the outlink follower to URL's within the same
+  domain. When disabled (false) the feature is likely to follow duplicates even when depth=1.
+  A value of -1 of 0 disables this feature.
+  </description>
+</property>
+
+<property>
+  <name>fetcher.follow.outlinks.num.links</name>
+  <value>10</value>
+  <description>(EXPERT)The number of outlinks to follow when fetcher.follow.outlinks.depth is enabled. Be careful, this can multiply
+  the total number of pages to fetch. This works with fetcher.follow.outlinks.depth.divisor, by default settings the followed outlinks
+  at depth 1 is 8, not 4.
+  </description>
+</property>
+
+<property>
+  <name>fetcher.follow.outlinks.depth.divisor</name>
+  <value>2</value>
+  <description>(EXPERT)The divisor of fetcher.follow.outlinks.num.links per fetcher.follow.outlinks.depth. This decreases the number
+  of outlinks to follow by increasing depth. The formula used is: outlinks = floor(divisor / depth * num.links). This prevents
+  exponential growth of the fetch list.
+  </description>
+</property>
+
+<property>
+  <name>fetcher.follow.outlinks.ignore.external</name>
+  <value>true</value>  
+  <description>Whether to ignore or followedlow external links. Set db.ignore.external.links to false and this to true to store outlinks
+  in the output but not follow them. If db.ignore.external.links is true this directive is ignored.
+  </description>
+</property>
+<property>
+  <name>plugin.includes</name>
+  <value>protocol-http|urlfilter-regex|parse-(html|tika)|index-(basic|more)|indexer-solr|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
+  <description>Regular expression naming plugin directory names to
+  include.  Any plugin not matching this expression is excluded.
+  In any case you need at least include the nutch-extensionpoints plugin. By
+  default Nutch includes crawling just HTML and plain text via HTTP,
+  and basic indexing and search plugins. In order to use HTTPS please enable 
+  protocol-httpclient, but be aware of possible intermittent problems with the 
+  underlying commons-httpclient library. Set parsefilter-naivebayes for classification based focused crawler.
+  </description>
+</property>
+<property>
+  <name>parser.html.outlinks.ignore_tags</name>
+  <value>script</value>
+  <description>Comma separated list of HTML tags, from which outlinks 
+  shouldn't be extracted. Nutch takes links from: a, area, form, frame, 
+  iframe, script, link, img. If you add any of those tags here, it
+  won't be taken. Default is empty list. Probably reasonable value
+  for most people would be "img,script,link".</description>
+</property>
+<property>
+  <name>parse.filter.urls</name>
+  <value>true</value>
+  <description>Whether the parser will filter URLs (with the configured URL filters).</description>
+</property>
+<property>
+  <name>parser.skip.truncated</name>
+  <value>false</value>
+  <description>Boolean value for whether we should skip parsing for truncated documents. By default this 
+  property is activated due to extremely high levels of CPU which parsing can sometimes take.  
+  </description>
+</property>
+<property>
+  <name>solr.server.type</name>
+  <value>http</value>
+  <description>
+    Specifies the SolrServer implementation to use. This is a string value
+    of one of the following 'cloud', 'concurrent', 'http' or 'lb'.
+    The values represent CloudSolrServer, ConcurrentUpdateSolrServer, 
+    HttpSolrServer or LBHttpSolrServer respectively.
+  </description>
+</property>
+
+<property>
+  <name>solr.server.url</name>
+  <value>http://127.0.0.1:8983/solr/sparkler</value>
+  <description>
+      Defines the Solr URL into which data should be indexed using the
+      indexer-solr plugin.
+  </description>
+</property>
+
+<property>
+  <name>solr.zookeeper.url</name>
+  <value>http://localhost:9983/</value>
+  <description>
+      Defines the Zookeeper URL which is an essential setting to be used 
+      when using SolrCloud. This should be a fully qualified URL similar to
+      the property provided within 'solr.server.url' above.
+  </description>
+</property>
+<property>
+  <name>solr.mapping.file</name>
+  <value>solrindex-mapping.xml</value>
+  <description>
+  Defines the name of the file that will be used in the mapping of internal
+  Nutch field names to solr index fields as specified in the target Solr schema.
+  </description>
+</property>
+
+<property> 
+  <name>solr.commit.size</name>
+  <value>50</value>
+  <description>
+  Defines the number of documents to send to Solr in a single update batch.
+  Decrease when handling very large documents to prevent Nutch from running
+  out of memory. NOTE: It does not explicitly trigger a server side commit.
+  </description>
+</property>
+
+<property>
+  <name>solr.commit.index</name>
+  <value>true</value>
+  <description>
+  When closing the indexer, trigger a commit to the Solr server. 
+  </description>
+</property>
+
+<property>
+  <name>moreIndexingFilter.indexMimeTypeParts</name>
+  <value>false</value>
+  <description>Determines whether the index-more plugin will split the mime-type
+  in sub parts, this requires the type field to be multi valued. Set to true for backward
+  compatibility. False will not split the mime-type.
+  </description>
+</property>
+</configuration>
