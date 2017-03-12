@@ -82,5 +82,5 @@ if __name__ == '__main__':
     remain = unfetched - fetched
     with open(args.output_file, 'a') as fw:
         for url in remain:
-            fw.write(str(url) + "\n")
+            fw.write(str(url.encode('utf-8')) + "\n")
 
