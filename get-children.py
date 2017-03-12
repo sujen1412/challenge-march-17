@@ -10,6 +10,7 @@ def makeOutlinkSet(data):
 
 
 def fetchedOutOfDomainLinks(solr, core):
+    print "Getting fetched outlinks"
     query = {}
     query["q"] = "*:*"
     query['fl']="url"
@@ -21,6 +22,7 @@ def fetchedOutOfDomainLinks(solr, core):
     outlink_set = set()
     end = 100
     while (start < end):
+        print "Querying range {} to {}".format(start, end)
         query['start'] = start
         query_data = urllib.urlencode(query) + "&" + urllib.urlencode({"fq":"!hostname:*yahoo.com"}) \
                      + "&" + urllib.urlencode({"fq":"status_name:fetch_success"})
@@ -36,6 +38,7 @@ def fetchedOutOfDomainLinks(solr, core):
 
 
 def getOutlinks(solr, core):
+    print "GEtting outlinks to fetch"
     query = {}
     query["q"] = "*:*"
     query['fl']="outlinks"
@@ -43,11 +46,12 @@ def getOutlinks(solr, core):
     query['rows'] = 100
     request_url = solr + core + "/select"
 
-    filter_query = "fq=hostname:*yahoo.com&fq=status_name:fetch_success"
+    filter_query = "fq=hostname:*yahoo.com&fq=status_name:fetch_success&fq=cdr_status=NOT_INDEXED"
     start = 0
     outlink_set = set()
     end = 100
     while (start < end):
+        print "Querying range {} to {}".format(start, end)
         query['start'] = start
         query_data = urllib.urlencode(query) + "&" + str(filter_query)
         req = urllib2.Request(request_url, query_data)
@@ -69,7 +73,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--output_file", default="outlinks.txt")
     parser.add_argument("--core", default="sparkler")
-    parser.add_argument("--solr", default="http://localhost:8983/solr/")
+    parser.add_argument("--solr", default="http://localhost:8986/solr/", required=True)
     args = parser.parse_args()
 
     unfetched = getOutlinks(args.solr, args.core)
