@@ -46,7 +46,7 @@ def getOutlinks(solr, core):
     query['rows'] = 100
     request_url = solr + core + "/select"
 
-    filter_query = "fq=hostname:*yahoo.com&fq=status_name:fetch_success&fq=cdr_status=NOT_INDEXED"
+    filter_query = "fq=hostname:*yahoo.com&fq=status_name:fetch_success&fq=cdr_status:NOT_INDEXED"
     start = 0
     outlink_set = set()
     end = 100
