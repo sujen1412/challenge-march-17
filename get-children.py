@@ -68,7 +68,7 @@ def getOutlinks(solr, core):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--output_file", default="outlinks.txt")
-    parser.add_argument("--core", default="sparkler-test")
+    parser.add_argument("--core", default="sparkler")
     parser.add_argument("--solr", default="http://localhost:8983/solr/")
     args = parser.parse_args()
 
