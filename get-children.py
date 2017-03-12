@@ -80,7 +80,7 @@ if __name__ == '__main__':
     fetched = fetchedOutOfDomainLinks(args.solr, args.core)
     common = unfetched.intersection(fetched)
     remain = unfetched - fetched
-    with open(args.output_file, 'a') as fw:
+    with open(args.output_file, 'w') as fw:
         for url in remain:
             fw.write(str(url.encode('utf-8')) + "\n")
 
