@@ -33,6 +33,17 @@ class SolrServer(object):
         self.server.add(docs, fieldUpdates={'cdr_status': status})
         pass
 
+    def mark_cdr_indexed(ids_list, solr_url, core):
+        solr_url = solr_url + core + "/update"
+        update_docs = []
+        for id in ids_list:
+            timestamp = datetime.datetime.utcnow().isoformat() + 'Z'
+            doc = {"id":id, "cdr_status":{"set":"CDR_INDEXED"}}
+            update_docs.append(doc)
+        print json.dumps(update_docs)
+        response = requests.post(solr_url, data=json.dumps(update_docs), headers={"content-type": "application/json"})
+        return response
+
     def commit(self):
         self.server.commit()
         pass
